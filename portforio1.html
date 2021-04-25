@@ -1,0 +1,21 @@
+root 'homes/top'
+get 'homes/about'
+get 'homes/begginer'
+get 'search/search'
+get 'users/my_page'
+get 'users/unsubscribe'
+get 'users/withdraw'
+get 'users/dive_profile'
+
+resourses :logs do
+  resourses :logcomments, only: [:create, :destroy]
+  resourse :favorites, only: [:create, :destroy]
+end
+resourses :users, only: [:show, :edit, update] do
+  member do
+    get :follow, :follower
+  end
+  resourse :relationships, only: [:create, :destroy]
+end
+resourses :rooms, only: [:show, :create]
+resourses :messages, only: [:create]
